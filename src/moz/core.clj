@@ -31,3 +31,27 @@
                       :type "nominal"}}})
 
 (oz/view! stacked-bar)
+
+(defn get-proj-dir
+  []
+  (str (System/getProperty "user.dir") "/"))
+
+(defn read-data-file
+  [fname]
+  (oz/load (str (get-proj-dir) fname ".edn")))
+
+(def stats-plot
+  {:data {:values (read-data-file "stats")}
+  :mark "point"
+  :encoding {
+             :x {:field "path" :type "quantitative"}
+             :y {:field "avg-speedup" :type "quantitative"}
+             :color {:bin true :field "size" :type "quantitative"}}})
+
+(def time-plot
+  {:data {:values (read-data-file "stats")}
+   :mark "point"
+   :encoding {:x {:field "path" :type "quantitative"}
+              :y {:field "avg-time" :type "quantitative"}
+              :color {:bin true :field "size" :type "quantitative"}}})
+
