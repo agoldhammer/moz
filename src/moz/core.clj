@@ -40,7 +40,7 @@
   [fname]
   (oz/load (str (get-proj-dir) fname ".edn")))
 
-(def stats-plot
+#_(def avg-stats-plot
   {:data {:values (read-data-file "stats")}
   :mark "point"
   :encoding {
@@ -48,10 +48,29 @@
              :y {:field "avg-speedup" :type "quantitative"}
              :color {:bin true :field "size" :type "quantitative"}}})
 
-(def time-plot
+#_(def avg-time-plot
   {:data {:values (read-data-file "stats")}
    :mark "point"
    :encoding {:x {:field "path" :type "quantitative"}
               :y {:field "avg-time" :type "quantitative"}
               :color {:bin true :field "size" :type "quantitative"}}})
+
+
+(defn stats-plot
+  []
+  (oz/view!
+   {:data {:values (read-data-file "stats")}
+    :mark "point"
+    :encoding {:x {:field "path" :type "quantitative"}
+               :y {:field "speedup" :type "quantitative"}
+               :color {:bin true :field "size" :type "quantitative"}}}))
+
+(defn time-plot
+  []
+  (oz/view!
+   {:data {:values (read-data-file "stats")}
+    :mark "point"
+    :encoding {:x {:field "path" :type "quantitative"}
+               :y {:field "time" :type "quantitative"}
+               :color {:bin true :field "size" :type "quantitative"}}}))
 
