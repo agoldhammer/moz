@@ -30,7 +30,7 @@
               :color {:field "item"
                       :type "nominal"}}})
 
-(oz/view! stacked-bar)
+#_(oz/view! stacked-bar)
 
 (defn get-proj-dir
   []
